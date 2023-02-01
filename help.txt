@@ -1,0 +1,13 @@
+dotnet --info
+dotnet new sln
+dotnet new webapi -o API
+dotnet sln add API
+dotnet new classlib -o Application
+dotnet sln add Application
+dotnet new classlib -o Domain
+dotnet sln add Domain
+dotnet new classlib -o Infrastructure
+dotnet sln add Infrastructure
+---------------------------------
+dotnet dev-certs https --trust
+
