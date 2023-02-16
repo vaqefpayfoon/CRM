@@ -13,6 +13,7 @@ cd Infrastructure
 dotnet add reference ..\Domain\
 cd API
 dotnet add reference ..\Infrastructure\
+dotnet add reference ..\Application\
 ---------------------------------
 dotnet dev-certs https --trust
 ----------------------------------
@@ -27,6 +28,6 @@ dotnet tool update -g dotnetsay
 dotnet tool uninstall --global dotnet-ef
 dotnet tool install --global dotnet-ef
 
-dotnet ef migrations add Initial -p ../Infrastructure -s ../API -o Data/Migrations --context StoreContext
+dotnet ef migrations add Initial -p ../Infrastructure -s ../API -o Data/Migrations --context DataContext
 dotnet ef migrations remove -p ../Infrastructure -s ../API
 dotnet ef database update
