@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth-gurad/auth.guard';
-import { HomeComponent } from '../dashboard/home/home.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
@@ -10,12 +10,10 @@ const routes: Routes = [
     data: { breadcrumb: 'Home' },
     canActivate: [AuthGuard]
   },
-  { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LayoutRoutingModule {}
+export class DashboardRoutingModule {}

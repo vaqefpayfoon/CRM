@@ -4,6 +4,7 @@ import { MenuComponent } from './menu/menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutRoutingModule } from './layout-routing.module';
+import { AuthModule } from '../auth/auth.module';
 
 
 
@@ -13,9 +14,9 @@ import { LayoutRoutingModule } from './layout-routing.module';
     SidebarComponent
   ],
   imports: [
-    CommonModule,
+    LayoutRoutingModule,
+    AuthModule,
     SharedModule,
-    LayoutRoutingModule
   ],
   exports: [
     MenuComponent,

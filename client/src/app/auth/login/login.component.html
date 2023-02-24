@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon mat-card-avatar>verified_user</mat-icon>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="100" class="form-group">
+          <mat-form-field fxFlex="30">
+            <mat-label>Email</mat-label>
+            <input
+              formControlName="userName"
+              matInput
+              class="form-control"
+              placeholder="User Name"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="100" class="form-group">
+          <mat-form-field fxFlex="30">
+            <mat-label>Password</mat-label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control"
+              matInput
+              placeholder="Password"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div fxLayout="row">
+        <div fxFlexOffset="10" fxFlex="70">
+          <button
+            mat-flat-button
+            color="primary"
+            [disabled]="!form.valid || form.pristine"
+            (click)="onLogin(form)"
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
