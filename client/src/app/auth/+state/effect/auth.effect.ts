@@ -5,13 +5,15 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { AuthModel } from 'src/app/models/auth-model';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffect {
   constructor(
     private authService: AuthService,
     private actions$: Actions<UserLoginAction.UserLoginActionUnion>,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   userLogin$ = createEffect(() =>
@@ -26,10 +28,8 @@ export class AuthEffect {
             });
           }),
           catchError((res: any) => {
-            const message =
-              res.status !== 401 ? res.error.response.message : null;
             return of(
-              UserLoginAction.LoginFaild({ payload: message })
+              UserLoginAction.LoginFaild({ payload: res })
             );
           })
         );
@@ -51,6 +51,7 @@ export class AuthEffect {
       this.actions$.pipe(
         ofType(UserLoginAction.LoginSuceess.type),
         map((action) => {
+          this.router.navigate(['']);
           return this.toggleSnackbar('welcome');
         })
       ),

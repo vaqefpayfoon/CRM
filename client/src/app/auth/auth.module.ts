@@ -6,19 +6,22 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { EFFECTS, REDUCERS } from './+state';
-
-
+import { AuthComponent } from './auth.component';
+import { guards } from './auth-gurad';
+import * as fromFacades from './+state/facade';
 
 @NgModule({
   declarations: [
-    LoginComponent
+    AuthComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,
-    SharedModule,
     AuthRoutingModule,
+    SharedModule,
     StoreModule.forFeature('auth', REDUCERS),
     EffectsModule.forFeature(EFFECTS),
-  ]
+  ],
+  providers: [...fromFacades.facades]
 })
 export class AuthModule { }

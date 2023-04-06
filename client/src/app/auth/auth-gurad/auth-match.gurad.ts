@@ -13,18 +13,18 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   providedIn: 'root',
 })
 export class AuthMatchGuard implements CanMatch {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   canMatch(route: Route, segments: UrlSegment[]): Observable<boolean> | boolean {
     return this.authService.currentUser$.pipe(
       map((user) => {
         if (user) return true;
         else {
-          this.router.navigate['/auth'];
+          route.redirectTo = '/auth/login';
           return false;
         }
       }),
-      catchError(this.router.navigate['/auth'])
+      // catchError(this.router.navigate['/auth/login'])
     );
   }
 }

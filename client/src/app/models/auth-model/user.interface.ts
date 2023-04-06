@@ -1,10 +1,10 @@
 export interface IUser {
     id: string;
     displayName: string;
-    email: string;
+    userName: string;
     token: string;
 }
 export interface ILogin {
-    email: string;
+    userName: string;
     password: string;
 }

@@ -20,7 +20,7 @@ namespace API.Controllers
             _context = context;
             _tokenService = tokenService;
         }
-
+    
         [HttpPost]
         public async Task<ActionResult<AppUser>> Register(string username, string password)
         {

@@ -6,16 +6,15 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('./dashboard/dashboard-routing.module').then(
-        (mod) => mod.DashboardRoutingModule
+      import('./dashboard/dashboard.module').then(
+        (mod) => mod.DashboardModule
       ),
-    canMatch: [AuthMatchGuard],
+    // canMatch: [AuthMatchGuard],
   },
   {
     path: 'auth',
     loadChildren: () =>
-      import('./auth/auth-routing.module').then((mod) => mod.AuthRoutingModule),
-      // canMatch: [AuthMatchGuard],
+      import('./auth/auth.module').then((mod) => mod.AuthModule),
   },
   // { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
 ];

@@ -7,8 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedModule } from './shared/shared.module';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { guards } from './auth/auth-gurad';
 
 @NgModule({
   declarations: [
@@ -19,12 +18,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    DashboardModule,
-    SharedModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
   ],
-  providers: [],
+  providers: [...guards],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
