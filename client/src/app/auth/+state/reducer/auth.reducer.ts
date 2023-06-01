@@ -4,18 +4,18 @@ import { AuthModel } from 'src/app/models/auth-model';
 import { UserLoginAction } from '../action';
 
 export interface IUserLoginState extends EntityState<AuthModel.IUser> {
-  selectedUser?: AuthModel.IUser;
+  selectedUser?: AuthModel.IUser | null;
   loaded: boolean;
   loading: boolean;
   error?: any;
 }
 
 export const adapter: EntityAdapter<AuthModel.IUser> = createEntityAdapter<AuthModel.IUser>({
-  selectId: (selectedUser) => selectedUser.id,
+  selectId: (selectedUser) => selectedUser?.id,
 });
 
 const initialState: IUserLoginState = adapter.getInitialState({
-  selectedUser: undefined,
+  selectedUser: null,
   loaded: false,
   loading: false,
   error: null,

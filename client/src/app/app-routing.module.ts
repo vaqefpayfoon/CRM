@@ -12,6 +12,14 @@ const routes: Routes = [
     // canMatch: [AuthMatchGuard],
   },
   {
+    path: 'baseInfo',
+    loadChildren: () =>
+      import('./dashboard/dashboard.module').then(
+        (mod) => mod.DashboardModule
+      ),
+    // canMatch: [AuthMatchGuard],
+  },
+  {
     path: 'auth',
     loadChildren: () =>
       import('./auth/auth.module').then((mod) => mod.AuthModule),

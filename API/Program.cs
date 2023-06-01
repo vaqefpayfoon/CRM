@@ -1,4 +1,6 @@
 using API.Extensions;
+using Infrastructure.Interfaces;
+using Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
@@ -6,6 +8,7 @@ ConfigurationManager configuration = builder.Configuration;
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(configuration);
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -13,7 +16,7 @@ builder.Services.AddCors();
 builder.Services.AddIdentityServices(configuration);
 
 var app = builder.Build();
-
+// app.UseMiddleware<ExceptionMiddleware>();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

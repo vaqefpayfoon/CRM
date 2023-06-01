@@ -6,22 +6,25 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { guards } from './auth/auth-gurad';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
+    MatSnackBarModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
   ],
-  providers: [...guards],
+  providers: [...guards, {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
   bootstrap: [AppComponent],
 })
 export class AppModule { }
