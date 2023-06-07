@@ -30,5 +30,10 @@ namespace API.Controllers
         {
             return await _repo.Login(info.UserName, info.Password);
         }
+        [HttpGet]
+        public ActionResult<string> Message()
+        {
+            return Ok("khiar saladi");
+        }
     }
 }

@@ -14,3 +14,9 @@ FROM (
 LEFT JOIN \"Photos\" AS \"p\" ON \"t\".\"Id\" = \"p\".\"AppUserId\"
 ORDER BY \"t\".\"Id\"" (0723d8ff)
 2023-06-07T16:09:10.5396181+08:00  [INF] Application is shutting down... (90f52c38)
+2023-06-07T16:29:45.3316178+08:00  [INF] Now listening on: "http://localhost:6000" (d826f4b8)
+2023-06-07T16:29:45.3354722+08:00  [INF] Application started. Press Ctrl+C to shut down. (dcaefe54)
+2023-06-07T16:29:45.3357259+08:00  [INF] Hosting environment: "Development" (bc5a1a4e)
+2023-06-07T16:29:45.3357487+08:00  [INF] Content root path: "C:\mine\CRM\API" (cc26f24e)
+2023-06-07T16:30:06.0255487+08:00 0HMR765IQL5PO:00000001 [WRN] Failed to determine the https port for redirect. (ca76cc21)
+2023-06-07T16:30:21.6494921+08:00  [INF] Application is shutting down... (90f52c38)
