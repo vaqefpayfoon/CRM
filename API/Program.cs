@@ -15,6 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors();
 builder.Services.AddIdentityServices(configuration);
 
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+
 var app = builder.Build();
 // app.UseMiddleware<ExceptionMiddleware>();
 // Configure the HTTP request pipeline.
@@ -23,6 +26,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+var loggerFactory = app.Services.GetService<ILoggerFactory>();
+loggerFactory.AddFile(builder.Configuration["Logging:LogFilePath"].ToString()); 
 
 app.UseHttpsRedirection();
 
