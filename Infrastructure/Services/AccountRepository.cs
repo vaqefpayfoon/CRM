@@ -3,6 +3,7 @@ using Domain.Entities;
 using Infrastructure.Data;
 using Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Infrastructure.Services
 {
@@ -10,27 +11,37 @@ namespace Infrastructure.Services
     {
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
-        public AccountRepository(DataContext context, ITokenService tokenService)
+        private ILogger<AccountRepository> _logger { get; }
+        public AccountRepository(DataContext context, ITokenService tokenService, ILogger<AccountRepository> logger)
         {
             _context = context;
             _tokenService = tokenService;
+            _logger = logger;
         }
         public async Task<UserInfoDto> Login(string username, string password)
         {
-            var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.UserName.ToLower() == username.ToLower());
-
-            if (user == null)
-                return null;
-            
-            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
-                return null;
-
-            return new UserInfoDto
+            try
             {
-                Id = user.Id,
-                Token = _tokenService.CreateToken(user),
-                UserName = user.UserName
-            };
+                var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.UserName.ToLower() == username.ToLower());
+
+                if (user == null)
+                    return null;
+
+                if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                    return null;
+
+                return new UserInfoDto
+                {
+                    Id = user.Id,
+                    Token = _tokenService.CreateToken(user),
+                    UserName = user.UserName
+                };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation(ex.Message);
+                return null;
+            }
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
@@ -39,7 +50,7 @@ namespace Infrastructure.Services
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 
-                for (int i=0; i< computedHash.Length; i++)
+                for (int i = 0; i < computedHash.Length; i++)
                 {
                     if (computedHash[i] != passwordHash[i]) return false;
                 }
@@ -63,7 +74,7 @@ namespace Infrastructure.Services
 
             await _context.Users.AddAsync(newUser);
             await _context.SaveChangesAsync();
-            
+
             return new UserInfoDto
             {
                 Id = newUser.Id,

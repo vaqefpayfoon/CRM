@@ -16,6 +16,7 @@ typings/
 
 # Build results
 [Dd]ebug/
+Logs/
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/

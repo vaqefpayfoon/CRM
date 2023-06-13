@@ -28,7 +28,8 @@ if (app.Environment.IsDevelopment())
 }
 
 var loggerFactory = app.Services.GetService<ILoggerFactory>();
-loggerFactory.AddFile(builder.Configuration["Logging:LogFilePath"].ToString()); 
+loggerFactory.AddFile(builder.Configuration["Logging:LogFilePath"].ToString());
+
 
 app.UseHttpsRedirection();
 

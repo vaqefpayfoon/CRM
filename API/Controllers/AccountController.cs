@@ -13,10 +13,12 @@ namespace API.Controllers
     [AllowAnonymous]
     public class AccountController : BaseApiController
     {
-        public IAccountRepository _repo { get; }
-        public AccountController(IAccountRepository context)
+        private IAccountRepository _repo { get; }
+        private ILogger<AccountController> _logger { get; }
+        public AccountController(IAccountRepository context, ILogger<AccountController> logger)
         {
             _repo = context;
+            _logger = logger;
         }
     
         [HttpPost]
@@ -28,11 +30,13 @@ namespace API.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<UserInfoDto>> Login(LoginDto info)
         {
+            _logger.LogInformation(info.UserName + "  " + info.Password);
             return await _repo.Login(info.UserName, info.Password);
         }
         [HttpGet]
         public ActionResult<string> Message()
         {
+            _logger.LogInformation("khiar saladi");
             return Ok("khiar saladi");
         }
     }
