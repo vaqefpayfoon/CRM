@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthModel } from 'src/app/models/auth-model';
+import { AuthModel } from 'src/app/@models';
 import { UserLoginAction } from "../action";
 import { IUserLoginMapState } from "../reducer";
 

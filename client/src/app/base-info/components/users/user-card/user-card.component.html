@@ -1,0 +1,64 @@
+<mat-card class="card">
+  <div
+    fxLayout="row wrap"
+    fxLayout.lt-md="column"
+    fxFlex="100"
+    fxLayoutAlign="space-between center"
+    fxLayoutAlign.lt-md="start start"
+    class="card__header"
+    fxLayoutGap.lt-md="1rem"
+  >
+    <div
+      fxFlex="10"
+      fxFlex.lt-md="100"
+      class="font-semi-thick"
+      fxFlexOrder.lt-md="3"
+    >
+      {{ user?.id }}
+    </div>
+    <div
+      fxFlex="10"
+      fxFlex.lt-md="100"
+      class="font-semi-thick"
+      fxFlexOrder.lt-md="3"
+    >
+      {{ user?.userName }}
+    </div>
+    <div
+      fxFlex="10"
+      fxFlex.lt-md="100"
+      class="font-semi-thick"
+      fxFlexOrder.lt-md="3"
+    >
+      {{ user?.dateOfBirth }}
+    </div>
+    <div
+      fxFlex="10"
+      fxFlex.lt-md="100"
+      class="font-semi-thick"
+      fxLayoutAlign="center center"
+      fxLayoutAlign.lt-md="end"
+      fxLayout.lt-md="row"
+      fxFlexFill
+      fxFlexOrder.lt-md="1"
+    >
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="actions"
+        matBadgeColor="warn"
+        matBadgeOverlap="false"
+      >
+        <mat-icon svgIcon="action_off"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-menu #actions="matMenu">
+    <button mat-menu-item [routerLink]="['../userItem', user?.id]">
+      <mat-icon>remove_red_eye</mat-icon>
+      <span>Preview</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>flip</mat-icon>
+    </button>
+  </mat-menu>
+</mat-card>

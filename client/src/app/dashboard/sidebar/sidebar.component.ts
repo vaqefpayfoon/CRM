@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { IUser } from 'src/app/models/auth-model/user.interface';
+import { AuthModel } from 'src/app/@models';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,7 +19,7 @@ export class SidebarComponent implements AfterViewInit, OnInit {
 
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
-  user: IUser;
+  user: AuthModel.IUserInfo;
   constructor(
     private observer: BreakpointObserver,
     private cdr: ChangeDetectorRef,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth/services/auth.service';
-import { IUser } from './models/auth-model/user.interface';
+import { AuthModel } from './@models';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   }
 
   setCurrentUser() {
-    const user: IUser = JSON.parse(localStorage.getItem('user'));
+    const user: AuthModel.IUserInfo = JSON.parse(localStorage.getItem('user'));
     if (user) {
       this.authService.setCurrentUser(user);
     }

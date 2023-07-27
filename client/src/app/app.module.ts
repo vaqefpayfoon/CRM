@@ -8,13 +8,12 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { guards } from './auth/auth-gurad';
-import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { ErrorInterceptor } from './@interceptors/error.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { JwtInterceptor } from './@interceptors/jwt.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     MatSnackBarModule,
@@ -24,7 +23,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
   ],
-  providers: [...guards, {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
+  providers: [
+    ...guards,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

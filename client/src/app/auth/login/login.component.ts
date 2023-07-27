@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ILogin } from 'src/app/models/auth-model/user.interface';
 import { AuthFacade } from '../+state';
+import { AuthModel } from 'src/app/@models';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    const login: ILogin = {
+    const login: AuthModel.ILogin = {
       userName: this.form.value.userName,
       password: this.form.value.password
     }

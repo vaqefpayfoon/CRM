@@ -1,16 +1,16 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { Action, createReducer, on } from '@ngrx/store';
-import { AuthModel } from 'src/app/models/auth-model';
+import { AuthModel } from 'src/app/@models';
 import { UserLoginAction } from '../action';
 
-export interface IUserLoginState extends EntityState<AuthModel.IUser> {
-  selectedUser?: AuthModel.IUser | null;
+export interface IUserLoginState extends EntityState<AuthModel.IUserInfo> {
+  selectedUser?: AuthModel.IUserInfo | null;
   loaded: boolean;
   loading: boolean;
   error?: any;
 }
 
-export const adapter: EntityAdapter<AuthModel.IUser> = createEntityAdapter<AuthModel.IUser>({
+export const adapter: EntityAdapter<AuthModel.IUserInfo> = createEntityAdapter<AuthModel.IUserInfo>({
   selectId: (selectedUser) => selectedUser?.id,
 });
 

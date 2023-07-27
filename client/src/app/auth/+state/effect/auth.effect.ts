@@ -4,7 +4,7 @@ import { UserLoginAction } from '../action';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
-import { AuthModel } from 'src/app/models/auth-model';
+import { AuthModel } from 'src/app/@models';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class AuthEffect {
       map((action) => action.payload),
       switchMap((payload: AuthModel.ILogin) => {
         return this.authService.login(payload).pipe(
-          map((user: AuthModel.IUser) => {
+          map((user: AuthModel.IUserInfo) => {
             return UserLoginAction.LoginSuceess({
               payload: user,
             });

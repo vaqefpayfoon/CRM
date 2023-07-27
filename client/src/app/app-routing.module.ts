@@ -14,8 +14,8 @@ const routes: Routes = [
   {
     path: 'baseInfo',
     loadChildren: () =>
-      import('./dashboard/dashboard.module').then(
-        (mod) => mod.DashboardModule
+      import('./base-info/base-info.module').then(
+        (mod) => mod.BaseInfoModule
       ),
     // canMatch: [AuthMatchGuard],
   },
